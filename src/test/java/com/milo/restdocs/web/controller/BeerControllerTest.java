@@ -25,6 +25,8 @@ import static org.mockito.BDDMockito.given;
 //import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.*;
+import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
+import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.restdocs.request.RequestDocumentation.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -57,7 +59,17 @@ public class BeerControllerTest {
                 ),
                 requestParameters( // nuestro controlador no usa esto, pero si llegaramos a usar requestParam esta es la manera de probar y agregar
                         parameterWithName("iscold").description("Is Beer Cold Query param")
-                )));
+                ),
+                responseFields(// la documentacion debe estar completa, de cada propiedad que el objeto retorne, si falta uno, habra un error aqui
+                        fieldWithPath("id").description("Id of Beer"),
+                        fieldWithPath("version").description("Version number"),
+                        fieldWithPath("createdDate").description("Date Created"),
+                        fieldWithPath("lastModifiedDate").description("Date Updated"),
+                        fieldWithPath("beerName").description("Beer Name"),
+                        fieldWithPath("beerStyle").description("Beer Style"),
+                        fieldWithPath("upc").description("UPC of Beer"),
+                        fieldWithPath("price").description("Price"),
+                        fieldWithPath("quantityOnHand").description("Quantity On hand"))));
     }
 
     @Test
