@@ -56,7 +56,7 @@ public class BeerControllerTest {
                 .param("iscold", "yes") // nuestro controlador no usa esto, pero si llegaramos a usar requestParam esta es la manera de probar y agregar
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andDo(document("v1/beer",
+                .andDo(document("v1/beer-get",
                 pathParameters(
                         parameterWithName("beerId").description("UUID of desired beer to get.")
                 ),
@@ -86,7 +86,7 @@ public class BeerControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(beerDtoJson))
                 .andExpect(status().isCreated())
-                .andDo(document("v1/beer",
+                .andDo(document("v1/beer-new",
                         requestFields(
                                 fields.withPath("id").ignored(),
                                 fields.withPath("version").ignored(),
